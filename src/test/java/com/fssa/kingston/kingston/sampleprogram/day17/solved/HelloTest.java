@@ -1,5 +1,22 @@
 package com.fssa.kingston.kingston.sampleprogram.day17.solved;
 
-public class HelloTest {
+import org.junit.jupiter.api.Assertions;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * Sample test class
+ * @author BharathwajSoundarara
+ *
+ */
+public class HelloTest {
+	
+	/**
+	 * First test case
+	 */
+	@Test
+	public void helloTest() {
+		
+		Assertions.assertEquals("Hello World", "Hello World");
+	}
 }
