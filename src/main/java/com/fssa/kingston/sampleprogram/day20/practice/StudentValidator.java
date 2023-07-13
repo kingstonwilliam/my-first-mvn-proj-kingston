@@ -1,11 +1,11 @@
 package com.fssa.kingston.sampleprogram.day20.practice;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StudentValidator {
 
-	public static boolean validate(Student student)
-			throws IllegalArgumentException {
+	public static boolean validate(Student student) throws IllegalArgumentException {
 
 		// check for nullity of the parameter
 		if (student == null) {
@@ -18,15 +18,11 @@ public class StudentValidator {
 		validateEmail(student.emailId);
 		validateRoll(student.roll);
 		return true;
-		}
+	}
 
-	
-
-	public static boolean validateName(String name)
-			throws IllegalArgumentException {
+	public static boolean validateName(String name) throws IllegalArgumentException {
 		if (name == null || "".equals(name.trim()) || name.length() < 2) {
-			throw new IllegalArgumentException(
-					"Name cannot " + "be empty or null");
+			throw new IllegalArgumentException("Name cannot " + "be empty or null");
 		}
 		return true;
 	}
@@ -41,8 +37,7 @@ public class StudentValidator {
 
 	}
 
-	public static boolean validateEmail(String email)
-			throws IllegalArgumentException {
+	public static boolean validateEmail(String email) throws IllegalArgumentException {
 		// Below is a Regex by RFC standard RFC 5322
 		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 
@@ -58,8 +53,7 @@ public class StudentValidator {
 		}
 	}
 
-	public static boolean validateRoll(int rollNo)
-			throws IllegalArgumentException {
+	public static boolean validateRoll(int rollNo) throws IllegalArgumentException {
 
 		if (rollNo > 1000 && rollNo < 10000) {
 			return true;

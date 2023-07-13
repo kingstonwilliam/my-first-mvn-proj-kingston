@@ -1,87 +1,37 @@
-package com.fssa.kingston.sampleprogram.day19.practice;
+package com.fssa.kingston.kingston.sampleprogram.day21.practice;
 
-public class ValidationMethod {
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-		int id;
-		String name;
-		String password;
-		String email;
+import com.fssa.kingston.sampleprogram.day21.practice.Hospital;
+import com.fssa.kingston.sampleprogram.day21.practice.HospitalValidator;
 
-		public int getId() {
-			return id;
-		}
 
-		public void setId(int id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		public void setPassword(String password) {
-			this.password = password;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public void setEmail(String email) {
-			this.email = email;
-		}
-
-//		validate method get user crenditals and validate using another methods
-		void validate(ValidationMethod user) throws IllegalArgumentException {
-			validateId(user.getId());
-			validateName(user.getName());
-			validateEmail(user.getEmail());
-			validatePassword(user.getPassword());
-
-		}
-
-//		Id Validator => Id must be posituve numbers
-		public static boolean  validateId(int id) throws IllegalArgumentException {
-			if (id <= 0) {
-				throw new IllegalArgumentException("ID should be positive.");
-		
-			}
-			
-			return true;
-		}
-
-	//   Username Validator => username length greater than 2.
-		void validateName(String name) throws IllegalArgumentException {
-			if (name == null || name.length() < 2) {
-				throw new IllegalArgumentException("Name should have a minimum length of 2 characters.");
-			}
-		}
-
-	//  email validator checks for the presence of '@' and '.' 
-		void validateEmail(String email) throws IllegalArgumentException {
-			String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-			boolean isMatch = email.matches(emailRegex);
-			if (!isMatch) {
-				throw new IllegalArgumentException("Invalid email format.");
-			}
-		}
-
-	//  password validator must have 8 len, one lower, one upper, one digit and one speacial char
-		void validatePassword(String password) throws IllegalArgumentException {
-			String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
-			boolean isMatch = password.matches(passwordRegex);
-			if (!isMatch) {
-				throw new IllegalArgumentException("Invalid password format.");
-			}
-		}
-
+public class TestHospitalValidator {
+	@Test
+	public void testValidate() {
+		Hospital hospital = getHospital();
+		Assertions.assertTrue(HospitalValidator.validate(hospital));
 	}
-
+	@Test
+	public void testInvalidName() {
+		Hospital hospital = getHospital();
+		try {
+			hospital.hospitalName = "asdfg";
+			HospitalValidator.validate(hospital);
+		} catch (IllegalArgumentException ex) {
+			Assertions.assertEquals("Name cannot be empty or null",
+					ex.getMessage());
+			
+		}
+	}
+	public Hospital getHospital() {
+		Hospital hospital = new Hospital();
+		hospital.hospitalName = "k";
+	    hospital.hospitalAddress="a";
+	    hospital.district="a";
+	    hospital.pincode=123456;
+	    hospital.emailId="asdf@.com";
+		return hospital;
+	}
+}
